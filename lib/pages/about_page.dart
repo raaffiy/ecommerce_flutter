@@ -1,18 +1,15 @@
-import 'package:ecommerce/components/bottom_nav_bar.dart';
-import 'package:ecommerce/pages/about_page.dart';
-import 'package:ecommerce/pages/cart_page.dart';
-import 'package:ecommerce/pages/shop_page.dart';
+import 'package:ecommerce/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AboutPage extends StatefulWidget {
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
-  HomePageState createState() => HomePageState();
+  AboutPageState createState() => AboutPageState();
 }
 
-class HomePageState extends State<HomePage> {
+class AboutPageState extends State<AboutPage> {
   // Error Logout, ketika home page atau about page di pilih
   // maka akan terjadi error yaitu tidak bisa logout
   late User? user;
@@ -28,31 +25,12 @@ class HomePageState extends State<HomePage> {
     FirebaseAuth.instance.signOut();
   }
 
-  // this selected index is to control the bottom nav bar
-  int _selectedIndex = 0;
-
-  // this method will update our selected index
-  // when the user taps on the bottom bar
-  void navigateBottomBar(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  // Pages to display
-  final List<Widget> _pages = [
-    // Shop Page
-    const ShopPage(),
-
-    // Cart Page
-    const CartPage(),
-  ];
-
   // UI Ecommerce
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Navbar Up
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -159,12 +137,43 @@ class HomePageState extends State<HomePage> {
       ),
 
       // Page
-      body: _pages[_selectedIndex],
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Created By',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 50,
+              ),
+            ),
 
-      // Navbar Down
-      backgroundColor: Colors.grey[300],
-      bottomNavigationBar: MyBottomNavBar(
-        onTabChange: (index) => navigateBottomBar(index),
+            SizedBox(height: 5),
+
+            // Sub Title
+            Text(
+              'Maulana Ra\'afi',
+              style: TextStyle(
+                fontSize: 23,
+                color: Color.fromARGB(255, 87, 87, 87),
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            // Sub Title
+            Text(
+              'XI RPL U',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            SizedBox(height: 48),
+          ],
+        ),
       ),
     );
   }

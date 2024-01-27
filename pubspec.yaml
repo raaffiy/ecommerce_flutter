@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
   google_sign_in: ^6.2.1
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,13 @@ flutter:
     - lib/images/google.png
     - lib/images/add_account.png
     - lib/images/forgot_account.png
+    - lib/images/product.jpg
+    - lib/images/product (2).jpg
+    - lib/images/product (3).jpg
+    - lib/images/product (4).jpg
+    - lib/images/product (5).jpg
+    - lib/images/product (6).jpg
+    - assets/icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
