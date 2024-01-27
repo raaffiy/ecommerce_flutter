@@ -84,9 +84,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 10),
 
                 // Logo
-                const Icon(
-                  Icons.lock,
-                  size: 70,
+                Container(
+                  width: 80, // Sesuaikan dengan ukuran yang Anda inginkan
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), // Sudut border
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      'lib/images/add_account.png',
+                    ),
+                  ),
                 ),
 
                 const SizedBox(height: 20),
