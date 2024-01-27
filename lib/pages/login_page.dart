@@ -121,7 +121,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         "Forgot Password?",
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(
+                          color: Colors.blueGrey[500],
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
