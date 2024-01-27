@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^4.16.0
   google_sign_in: ^6.2.1
   google_nav_bar: ^5.0.6
+  provider:
 
 dev_dependencies:
   flutter_test:
@@ -71,12 +72,12 @@ flutter:
     - lib/images/google.png
     - lib/images/add_account.png
     - lib/images/forgot_account.png
-    - lib/images/product.jpg
-    - lib/images/product (2).jpg
-    - lib/images/product (3).jpg
-    - lib/images/product (4).jpg
-    - lib/images/product (5).jpg
-    - lib/images/product (6).jpg
+    - lib/images/product.png
+    - lib/images/product2.png
+    - lib/images/product3.png
+    - lib/images/product4.png
+    - lib/images/product5.png
+    - lib/images/product6.png
     - assets/icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
