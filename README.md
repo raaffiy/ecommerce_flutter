@@ -1,8 +1,8 @@
-## Fiture Project
+## Feature Project
 
 1. Login & Registrasi with Firebase
 2. Login With Google
-3. Fiture Add to cart
+3. Feature Add to cart
 
 ## Page Folders in this Project
 
