@@ -1,6 +1,10 @@
-# ecommerce
+## Fiture Project
 
-## Page In Folder
+1. Login & Registrasi with Firebase
+2. Login With Google
+3. Fiture Add to cart
+
+## Page Folders in this Project
 
 <h3>Page Intro</h3>
 
