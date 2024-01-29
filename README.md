@@ -48,3 +48,9 @@
 1. cart_page.dart (Page Utama)
 2. cart_item.dart = Membuat desain tampilan pada cart page lalu di hubungkan dengan cart page
 3. cart.dart = Database yang dihubungkan dengan shoe.dart yang berdasarkan category
+
+## Maintance Update
+
+1. Email harus sesuai dengan akun google
+2. Menambahkan Feature forgot password
+3. Fix to Bug
