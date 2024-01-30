@@ -27,7 +27,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text('Password reset link sent! Check your email'),
+              backgroundColor: Colors.white,
+              content: Text(
+                'Password reset link sent! Check your email',
+                style: TextStyle(color: Colors.red),
+              ),
             );
           },
         );
@@ -39,7 +43,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              content: Text(e.message.toString()),
+              backgroundColor: Colors.white,
+              content: Text(
+                e.message.toString(),
+                style: const TextStyle(color: Colors.red),
+              ),
             );
           },
         );
