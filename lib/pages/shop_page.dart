@@ -27,7 +27,7 @@ class _ShopPageState extends State<ShopPage> {
     // alert the user, shoe successfully added
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => const AlertDialog(
         title: Text('Successfully Added!'),
         content: Text('Check Your Cart'),
       ),

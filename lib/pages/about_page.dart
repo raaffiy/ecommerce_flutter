@@ -1,6 +1,8 @@
 import 'package:ecommerce/pages/home_page.dart';
+import 'package:ecommerce/pages/intro_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class AboutPageState extends State<AboutPage> {
   // Sign User Out
   void signUserOut() {
     FirebaseAuth.instance.signOut();
+    Get.offAll(const IntroPage());
   }
 
   // UI Ecommerce
