@@ -30,7 +30,7 @@ class _CartItemState extends State<CartItem> {
         title: Text(widget.shoe.name),
         subtitle: Text(widget.shoe.price),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           onPressed: removeItemCart,
         ),
       ),
