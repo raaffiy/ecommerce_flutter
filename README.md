@@ -56,4 +56,4 @@
 
 1. Email harus sesuai dengan akun google
 2. Menambahkan Feature forgot password
-3. Fix to Bug
+3. Buy Cart
