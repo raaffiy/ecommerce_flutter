@@ -2,6 +2,7 @@ import 'package:ecommerce/components/my_button.dart';
 import 'package:ecommerce/components/my_textfield.dart';
 import 'package:ecommerce/components/my_textfield_email.dart';
 import 'package:ecommerce/components/square_tile.dart';
+import 'package:ecommerce/pages/forgot_pw_page.dart';
 import 'package:ecommerce/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +61,11 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.white,
           title: Center(
             child: Text(
               message,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         );
@@ -144,11 +145,23 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: Colors.blueGrey[500],
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ForgotPasswordPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: Colors.blueGrey[500],
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
