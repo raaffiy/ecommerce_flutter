@@ -17,17 +17,19 @@
 
 1. login_page.dart (Page Utama)
 2. my_button.dart = Desain button login
-3. my_textfield.dart = Desain input data login (email & password)
-4. square_tile.dart = Desain Button Login with google
-5. auth_service.dart = Login / Registrasi melalui button google
+3. my_textfield_email.dart = Desain input data login (email)
+4. my_textfield.dart = Desain input data login (password)
+5. square_tile.dart = Desain Button Login with google
+6. auth_service.dart = Login / Registrasi melalui button google
 
 <h3>Page Register</h3>
 
 1. register_page.dart (Page Utama)
 2. my_button.dart = Desain button register
-3. my_textfield.dart = Desain input data login (email & repeat password &password)
-4. square_tile.dart = Desain Button register with google
-5. auth_service.dart = Login / Registrasi melalui button google
+3. my_textfield_email.dart = Desain input data login (email)
+4. my_textfield.dart = Desain input data login (password)
+5. square_tile.dart = Desain Button register with google
+6. auth_service.dart = Login / Registrasi melalui button google
 
 <h3>Page Home</h3>
 
@@ -36,6 +38,7 @@
 3. about_page.dart = Untuk menghubungkan home page dengan About page (button)
 4. cart_page.dart = Untuk menghubungkan home page dengan cart page (button)
 5. shop_page.dart = Untuk menghubungkan home page dengan Shop page (button)
+6. drawer_list = Desain Drawer yang akan dihubungkan ke home page dan about page
 
 <h3>Page Shop</h3>
 

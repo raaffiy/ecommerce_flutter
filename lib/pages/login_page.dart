@@ -1,5 +1,6 @@
 import 'package:ecommerce/components/my_button.dart';
 import 'package:ecommerce/components/my_textfield.dart';
+import 'package:ecommerce/components/my_textfield_email.dart';
 import 'package:ecommerce/components/square_tile.dart';
 import 'package:ecommerce/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
 
                 // email textfield
-                MyTextField(
+                MyTextFieldEmail(
                   controller: emailController,
                   hintText: 'Email',
                   obscureText: false,

@@ -1,35 +1,54 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
-  final controller;
+class MyTextField extends StatefulWidget {
+  final TextEditingController controller;
   final String hintText;
   final bool obscureText;
 
   const MyTextField({
-    super.key,
+    Key? key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
-  });
+  }) : super(key: key);
+
+  @override
+  _MyTextFieldState createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
-        controller: controller,
-        obscureText: obscureText,
+        controller: widget.controller,
+        obscureText: _obscureText,
         decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
+          ),
+          fillColor: Colors.grey.shade200,
+          filled: true,
+          hintText: widget.hintText,
+          hintStyle: TextStyle(color: Colors.grey[500]),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText ? Icons.visibility_off : Icons.visibility,
+              color: Colors.grey[500],
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-            fillColor: Colors.grey.shade200,
-            filled: true,
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey[500])),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          ),
+        ),
       ),
     );
   }

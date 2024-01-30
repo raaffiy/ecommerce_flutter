@@ -1,3 +1,4 @@
+import 'package:ecommerce/components/drawer_list.dart';
 import 'package:ecommerce/pages/home_page.dart';
 import 'package:ecommerce/pages/intro_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,8 +13,6 @@ class AboutPage extends StatefulWidget {
 }
 
 class AboutPageState extends State<AboutPage> {
-  // Error Logout, ketika home page atau about page di pilih
-  // maka akan terjadi error yaitu tidak bisa logout
   late User? user;
 
   @override
@@ -32,113 +31,12 @@ class AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Navbar Up
-      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Padding(
-              padding: EdgeInsets.only(left: 12.0),
-              child: Icon(
-                Icons.menu,
-                color: Colors.black,
-              ),
-            ),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          ),
-        ),
       ),
-
-      // Content Navbar Up
-      drawer: Drawer(
-        backgroundColor: Colors.grey[900],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                // Logo
-                DrawerHeader(
-                  child: Image.asset('assets/icon.png'),
-                ),
-
-                // Home pages
-                Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      'Home',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () {
-                      // Navigasi ke home_page.dart
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
-                      );
-                    },
-                  ),
-                ),
-
-                // About Page
-                Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.info,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      'About',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onTap: () {
-                      // Navigasi ke about_page.dart
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AboutPage()),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-
-            // Logout Page
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0, bottom: 25),
-              child: ListTile(
-                leading: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-                title: const Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: signUserOut,
-              ),
-            ),
-          ],
-        ),
+      drawer: DrawerList(
+        signOutCallback: signUserOut,
       ),
-
       // Page
       body: const Center(
         child: Column(
