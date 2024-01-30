@@ -10,7 +10,7 @@
 
 1. intro_page.dart (Page Utama)
 2. login_or_register_page.dart => Melihat database (firebase) bahwa akun sudah terdaftar atau belum
-3. auth_page.dart => Jika sudah memiliki account maka menampilkan page Home
+3. auth_page.dart => Jika sudah memiliki account maka menampilkan page Home,
    Jika belum memiliki account maka menampilkan page login
 
 <h3>Page Login</h3>
