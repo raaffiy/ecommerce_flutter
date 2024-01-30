@@ -22,6 +22,9 @@
 5. square_tile.dart = Desain Button Login with google
 6. auth_service.dart = Login / Registrasi melalui button google
 
+<h3>Page Forgot Password</h3>
+1. forgot_pw_page.dart (Page Utama)
+
 <h3>Page Register</h3>
 
 1. register_page.dart (Page Utama)

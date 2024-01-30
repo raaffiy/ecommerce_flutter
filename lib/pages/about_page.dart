@@ -1,5 +1,4 @@
 import 'package:ecommerce/components/drawer_list.dart';
-import 'package:ecommerce/pages/home_page.dart';
 import 'package:ecommerce/pages/intro_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
