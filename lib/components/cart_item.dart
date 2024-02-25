@@ -12,9 +12,51 @@ class CartItem extends StatefulWidget {
 }
 
 class _CartItemState extends State<CartItem> {
+  int quantity = 1; // Tambahkan variabel quantity
+
+  // Mengurangi jumlah item dalam keranjang
+  void decreaseQuantity() {
+    setState(() {
+      if (quantity > 1) {
+        quantity--;
+      }
+    });
+  }
+
+  // Menambah jumlah item dalam keranjang
+  void increaseQuantity() {
+    setState(() {
+      quantity++;
+    });
+  }
+
   // remove item from cart
   void removeItemCart() {
-    Provider.of<Cart>(context, listen: false).removeItemFromCart(widget.shoe);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Are you sure?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Hapus item dari keranjang
+                Provider.of<Cart>(context, listen: false)
+                    .removeItemFromCart(widget.shoe);
+                Navigator.pop(context);
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -26,12 +68,41 @@ class _CartItemState extends State<CartItem> {
       ),
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: Image.asset(widget.shoe.imagePath),
-        title: Text(widget.shoe.name),
-        subtitle: Text(widget.shoe.price),
-        trailing: IconButton(
-          icon: const Icon(Icons.delete),
-          onPressed: removeItemCart,
+        leading: Image.asset(widget.shoe.imagePath, width: 50),
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(widget.shoe.name),
+        ),
+        subtitle: Row(
+          // Mengganti Column dengan Row
+          children: [
+            Text(widget.shoe.price),
+            // Tampilkan jumlah produk
+            Text(
+              ' = $quantity',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Tombol kurangi jumlah
+            IconButton(
+              icon: const Icon(Icons.remove),
+              onPressed: decreaseQuantity,
+            ),
+            // Tombol tambah jumlah
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: increaseQuantity,
+            ),
+            // Tombol hapus item
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: removeItemCart,
+            ),
+          ],
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:ecommerce/pages/cart_page.dart';
 import 'package:ecommerce/pages/intro_page.dart';
 import 'package:ecommerce/pages/shop_page.dart';
 import 'package:ecommerce/components/drawer_list.dart'; // Import DrawerList
+import 'package:ecommerce/pages/transaksi_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,7 @@ class HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const ShopPage(),
     const CartPage(),
+    const Transaksi(),
   ];
 
   @override

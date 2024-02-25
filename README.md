@@ -60,4 +60,6 @@
 
 ## Maintance Update
 
-1. Buy Cart
+1. checkout_page.dart = fix ui
+2. transaksi_page.dart = fix ui
+3. fix to system = add to cart, checkout, all

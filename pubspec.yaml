@@ -80,6 +80,7 @@ flutter:
     - lib/images/product5.png
     - lib/images/product6.png
     - assets/icon.png
+    - lib/images/success.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
