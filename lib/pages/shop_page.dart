@@ -1,6 +1,7 @@
 import 'package:ecommerce/components/shoe_tile.dart';
 import 'package:ecommerce/models/cart.dart';
 import 'package:ecommerce/models/shoe.dart';
+import 'package:ecommerce/pages/all_product_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,23 +73,36 @@ class _ShopPageState extends State<ShopPage> {
           ),
 
           // Hot Picks
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   'Hot Picks 🔥',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
-                Text(
-                  'See All',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.blue),
+                GestureDetector(
+                  // Tambahkan GestureDetector untuk menangani onTap
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AllProducts(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'See All',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
                 ),
               ],
             ),

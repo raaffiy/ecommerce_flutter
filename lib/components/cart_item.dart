@@ -77,11 +77,6 @@ class _CartItemState extends State<CartItem> {
           // Mengganti Column dengan Row
           children: [
             Text(widget.shoe.price),
-            // Tampilkan jumlah produk
-            Text(
-              ' = $quantity',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
           ],
         ),
         trailing: Row(
@@ -92,6 +87,11 @@ class _CartItemState extends State<CartItem> {
               icon: const Icon(Icons.remove),
               onPressed: decreaseQuantity,
             ),
+            // Text menampilkan jumlah
+            Text(
+              '$quantity',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             // Tombol tambah jumlah
             IconButton(
               icon: const Icon(Icons.add),
@@ -101,6 +101,7 @@ class _CartItemState extends State<CartItem> {
             IconButton(
               icon: const Icon(Icons.delete),
               onPressed: removeItemCart,
+              iconSize: 25,
             ),
           ],
         ),

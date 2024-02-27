@@ -27,6 +27,49 @@ class _CheckOutState extends State<CheckOut> {
     );
   }
 
+  Future<void> _showConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Are You Sure?'),
+          content: const Text('Do not enter wrong data'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle the action when user clicks "Yes"
+                Navigator.of(context).pop(); // Close the dialog
+                _completePurchase(); // Call the function to complete the purchase
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _completePurchase() {
+    // Add your logic to complete the purchase here
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SuccessBuy(),
+      ),
+    );
+  }
+
+  void _onTap() {
+    _showConfirmationDialog();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,6 +203,48 @@ class _CheckOutState extends State<CheckOut> {
 
                 const SizedBox(height: 20),
 
+                // Number
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Number Phone : ',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 107, 106, 106),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 5),
+
+                // Note textfield
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade400),
+                      ),
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
+                      hintText: 'Number',
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
                 // note
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -231,7 +316,7 @@ class _CheckOutState extends State<CheckOut> {
 
                 // Button Buy Product
                 GestureDetector(
-                  onTap: OnTap,
+                  onTap: _onTap,
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     margin: const EdgeInsets.symmetric(horizontal: 25),

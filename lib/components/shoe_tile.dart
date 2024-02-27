@@ -48,22 +48,58 @@ class ShoeTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Shoe Name
-                    Text(
-                      shoe.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          shoe.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          "-",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          shoe.username,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(height: 5),
 
-                    // Price
-                    Text(
-                      '\$' + shoe.price,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          '\$' + shoe.price,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(width: 58),
+                        const Text(
+                          "-",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          shoe.number,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

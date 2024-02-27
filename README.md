@@ -1,10 +1,4 @@
-## Feature Project
-
-1. Login & Registrasi with Firebase
-2. Login With Google
-3. Feature Add to cart
-
-## Page Folders in this Project
+## Page Folders in Login Page & Register Page & Forgot Password Page
 
 <h3>Page Intro</h3>
 
@@ -36,6 +30,8 @@
 4. my_textfield.dart = Desain input data login (password)
 5. square_tile.dart = Desain Button register with google
 6. auth_service.dart = Login / Registrasi melalui button google
+
+## Page Folders in Home Page & Cart Page & Transaksi Page
 
 <h3>Page Home</h3>
 
