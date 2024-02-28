@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({super.key});
+  const ShopPage({Key? key});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
@@ -15,10 +15,23 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
   final user = FirebaseAuth.instance.currentUser!;
+  late List<Shoe> filteredShoes = [];
 
-  // Sign User Out
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
+  @override
+  void initState() {
+    super.initState();
+    filteredShoes = Provider.of<Cart>(context, listen: false).getShoeList();
+  }
+
+  // Search function
+  void searchShoes(String query) {
+    setState(() {
+      filteredShoes =
+          Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
+        return shoe.name.toLowerCase().contains(query.toLowerCase()) ||
+            shoe.username.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
   }
 
   // add shoe to cart
@@ -38,107 +51,116 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(
-      builder: (context, value, child) => Column(
-        children: [
-          // Search Bar
-          Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.symmetric(horizontal: 25),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Search',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-          ),
-
-          // Message
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25.0),
-            child: Text(
-              'Welcome ' + user.email!,
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-          ),
-
-          // Hot Picks
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                const Text(
-                  'Hot Picks 🔥',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-                GestureDetector(
-                  // Tambahkan GestureDetector untuk menangani onTap
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AllProducts(),
+      builder: (context, value, child) => SingleChildScrollView(
+        child: Column(
+          children: [
+            // Search Bar
+            Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.symmetric(horizontal: 25),
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: searchShoes,
+                      decoration: const InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
                       ),
-                    );
-                  },
-                  child: const Text(
-                    'See All',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
                     ),
                   ),
-                ),
-              ],
+                  const Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          const SizedBox(height: 10),
-
-          // List of shoe for sale
-          Expanded(
-            child: ListView.builder(
-              itemCount: 6,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                // get a shoe from shop list
-                Shoe shoe = value.getShoeList()[index];
-
-                // Return The Shoe
-                return ShoeTile(
-                  shoe: shoe,
-                  onTap: () => addShoeToCart(shoe),
-                );
-              },
+            // Message
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 25.0),
+              child: Text(
+                'Welcome ' + user.email!,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ),
-          ),
 
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 25.0,
-              left: 50,
-              right: 50,
+            // Hot Picks
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text(
+                    'Hot Picks 🔥',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AllProducts(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'See All',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child: Divider(
-              color: Colors.white,
+
+            const SizedBox(height: 10),
+
+            // List of shoe for sale
+            Container(
+              height: 408, // Adjust the height according to your requirement
+              child: ListView.builder(
+                itemCount: filteredShoes.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  // get a shoe from filtered shoe list
+                  Shoe shoe = filteredShoes[index];
+
+                  // Return The Shoe
+                  return ShoeTile(
+                    shoe: shoe,
+                    onTap: () => addShoeToCart(shoe),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+
+            const Padding(
+              padding: EdgeInsets.only(
+                top: 25.0,
+                left: 50,
+                right: 50,
+              ),
+              child: Divider(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

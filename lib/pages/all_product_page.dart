@@ -25,6 +25,7 @@ class _AllProductsState extends State<AllProducts> {
     super.initState();
     dropdownKelas = filterKelas.first;
     dropdownJurusan = filterJurusan.first;
+    filteredShoes = Provider.of<Cart>(context, listen: false).getShoeList();
   }
 
   // add shoe to cart
@@ -39,6 +40,19 @@ class _AllProductsState extends State<AllProducts> {
         content: Text('Check Your Cart'),
       ),
     );
+  }
+
+  late List<Shoe> filteredShoes = [];
+
+  // Search function
+  void searchShoes(String query) {
+    setState(() {
+      filteredShoes =
+          Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
+        return shoe.name.toLowerCase().contains(query.toLowerCase()) ||
+            shoe.username.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
   }
 
   @override
@@ -73,18 +87,25 @@ class _AllProductsState extends State<AllProducts> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     margin: const EdgeInsets.symmetric(horizontal: 25),
+                    height: 55,
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Search',
-                          style: TextStyle(color: Colors.grey),
+                        Expanded(
+                          child: TextField(
+                            onChanged: searchShoes,
+                            decoration: const InputDecoration(
+                              hintText: 'Search',
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                            ),
+                          ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.search,
                           color: Colors.grey,
                         ),
@@ -184,14 +205,15 @@ class _AllProductsState extends State<AllProducts> {
                   const SizedBox(height: 15),
 
                   // List of shoe for sale
+                  // List of shoe for sale
                   SizedBox(
                     height: 550, // Set a fixed height for the container
                     child: ListView.builder(
-                      itemCount: value.getShoeList().length,
+                      itemCount: filteredShoes.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         // get a shoe from shop list
-                        Shoe shoe = value.getShoeList()[index];
+                        Shoe shoe = filteredShoes[index];
 
                         // Return The Shoe
                         return AllTile(
