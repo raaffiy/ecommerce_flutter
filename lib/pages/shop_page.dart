@@ -36,16 +36,37 @@ class _ShopPageState extends State<ShopPage> {
 
   // add shoe to cart
   void addShoeToCart(Shoe shoe) {
-    Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
+    var cart = Provider.of<Cart>(context, listen: false);
 
-    // alert the user, shoe successfully added
-    showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-        title: Text('Successfully Added!'),
-        content: Text('Check Your Cart'),
-      ),
-    );
+    // Check if the shoe is already in the cart
+    if (cart.isShoeInCart(shoe)) {
+      // Show dialog if the product is already in the basket
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Product Already in Cart'),
+          content: const Text('The product is already in the basket.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Add the shoe to the cart
+      cart.addItemToCart(shoe);
+
+      // Alert the user, shoe successfully added
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text('Successfully Added!'),
+          content: Text('Check Your Cart'),
+        ),
+      );
+    }
   }
 
   @override

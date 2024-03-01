@@ -45,10 +45,29 @@ class AllTile extends StatelessWidget {
 
                       const SizedBox(height: 5),
 
-                      Text(
-                        shoe.number,
-                        style: const TextStyle(
-                          color: Colors.grey,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 25.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              shoe.kelas,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(width: 3),
+                            const Text(
+                              ' - ',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              shoe.jurusan,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -94,7 +113,7 @@ class AllTile extends StatelessWidget {
                       const SizedBox(height: 5),
 
                       Text(
-                        '\$' + shoe.price,
+                        'Rp' + shoe.price,
                         style: const TextStyle(
                           color: Colors.grey,
                         ),

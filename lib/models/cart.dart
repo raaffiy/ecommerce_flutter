@@ -5,62 +5,62 @@ class Cart extends ChangeNotifier {
   // List of shoes for sale
   List<Shoe> shoeShop = [
     Shoe(
-      name: 'Product 1',
-      price: '226',
+      id: '1',
       username: 'rafy',
-      number: '085714713706',
       kelas: 'XI',
       jurusan: 'TKJ',
+      name: 'Product 1',
+      price: '12.000',
       description: 'Description 1',
       imagePath: 'lib/images/product.png',
     ),
     Shoe(
-      name: 'Product 2',
-      price: '236',
+      id: '2',
       username: 'Udil',
-      number: '0861',
       kelas: 'X',
       jurusan: 'TEI',
+      name: 'Product 2',
+      price: '25.000',
       description: 'Description 2',
       imagePath: 'lib/images/product2.png',
     ),
     Shoe(
-      name: 'Product 3',
-      price: '220',
+      id: '3',
       username: 'arman',
-      number: '0812',
       kelas: 'XII',
       jurusan: 'AK',
+      name: 'Product 3',
+      price: '21.000',
       description: 'Description 3',
       imagePath: 'lib/images/product3.png',
     ),
     Shoe(
-      name: 'Product 4',
-      price: '267',
+      id: '4',
       username: 'yanto',
-      number: '0812',
       kelas: 'XI',
       jurusan: 'RPL',
+      name: 'Product 4',
+      price: '18.000',
       description: 'Description 4',
       imagePath: 'lib/images/product4.png',
     ),
     Shoe(
-      name: 'Product 5',
-      price: '250',
+      id: '5',
       username: 'yanti',
-      number: '0861',
       kelas: 'X',
       jurusan: 'TO',
+      name: 'Product 5',
+      price: '13.000',
       description: 'Description 5',
       imagePath: 'lib/images/product5.png',
     ),
     Shoe(
-      name: 'Product 6',
-      price: '230',
+      id: '6',
       username: 'syahrul',
-      number: '0863',
       kelas: 'X',
       jurusan: 'TET',
+      name: 'Product 6',
+      price: '10.000',
       description: 'Description 6',
       imagePath: 'lib/images/product6.png',
     ),
@@ -71,6 +71,10 @@ class Cart extends ChangeNotifier {
   // get list of shoe for sale
   List<Shoe> getShoeList() {
     return shoeShop;
+  }
+
+  bool isShoeInCart(Shoe shoe) {
+    return userCart.contains(shoe);
   }
 
   // get cart
