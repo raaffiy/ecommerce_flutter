@@ -79,7 +79,7 @@ class _CartItemState extends State<CartItem> {
         // harga product
         subtitle: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Text('Rp' + widget.shoe.price),
+          child: Text('Rp ' + widget.shoe.price),
         ),
 
         trailing: Row(

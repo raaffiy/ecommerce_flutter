@@ -55,7 +55,7 @@ class CartPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$' + '350',
+                    'Rp ' + '350',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
