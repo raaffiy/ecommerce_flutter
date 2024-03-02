@@ -67,6 +67,17 @@ class AllTile extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                             ),
+                            const Text(
+                              ' - ',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              shoe.options,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
                           ],
                         ),
                       ),

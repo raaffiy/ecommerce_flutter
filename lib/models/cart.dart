@@ -10,6 +10,7 @@ class Cart extends ChangeNotifier {
       kelas: 'XI',
       jurusan: 'TKJ',
       name: 'Product 1',
+      options: '1',
       price: '12.000',
       description: 'Description 1',
       imagePath: 'lib/images/product.png',
@@ -20,6 +21,7 @@ class Cart extends ChangeNotifier {
       kelas: 'X',
       jurusan: 'TEI',
       name: 'Product 2',
+      options: '2',
       price: '25.000',
       description: 'Description 2',
       imagePath: 'lib/images/product2.png',
@@ -30,6 +32,7 @@ class Cart extends ChangeNotifier {
       kelas: 'XII',
       jurusan: 'AK',
       name: 'Product 3',
+      options: '1',
       price: '21.000',
       description: 'Description 3',
       imagePath: 'lib/images/product3.png',
@@ -40,6 +43,7 @@ class Cart extends ChangeNotifier {
       kelas: 'XI',
       jurusan: 'RPL',
       name: 'Product 4',
+      options: '3',
       price: '18.000',
       description: 'Description 4',
       imagePath: 'lib/images/product4.png',
@@ -50,6 +54,7 @@ class Cart extends ChangeNotifier {
       kelas: 'X',
       jurusan: 'TO',
       name: 'Product 5',
+      options: 'K.I',
       price: '13.000',
       description: 'Description 5',
       imagePath: 'lib/images/product5.png',
@@ -60,6 +65,7 @@ class Cart extends ChangeNotifier {
       kelas: 'X',
       jurusan: 'TET',
       name: 'Product 6',
+      options: '2',
       price: '10.000',
       description: 'Description 6',
       imagePath: 'lib/images/product6.png',
@@ -91,6 +97,12 @@ class Cart extends ChangeNotifier {
   // remove items from cart
   void removeItemFromCart(Shoe shoe) {
     userCart.remove(shoe);
+    notifyListeners();
+  }
+
+  // clear product in cart
+  void clearCart() {
+    userCart.clear();
     notifyListeners();
   }
 }

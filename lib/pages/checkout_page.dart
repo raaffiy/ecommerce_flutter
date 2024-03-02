@@ -1,5 +1,7 @@
+import 'package:ecommerce/models/cart.dart';
 import 'package:ecommerce/pages/success_buy.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CheckOut extends StatefulWidget {
   const CheckOut({Key? key}) : super(key: key);
@@ -11,11 +13,21 @@ class CheckOut extends StatefulWidget {
 class _CheckOutState extends State<CheckOut> {
   // list lokasi
   List<String> listLokasi = <String>['TKJ', 'TEI', 'RPL', 'TET', 'AK', 'TO'];
-  String dropdownValue = '';
+  List<String> listHari = <String>[
+    'SENIN',
+    'SELASA',
+    'RABU',
+    'KAMIS',
+    'JUMAT',
+    'SABTU'
+  ];
+  String dropdownLokasi = '';
+  String dropdownHari = '';
   @override
   void initState() {
     super.initState();
-    dropdownValue = listLokasi.first;
+    dropdownLokasi = listLokasi.first;
+    dropdownHari = listHari.first;
   }
 
   void OnTap() {
@@ -44,7 +56,7 @@ class _CheckOutState extends State<CheckOut> {
             ),
             TextButton(
               onPressed: () {
-                // Handle the action when user clicks "Yes"
+                // Handle the action when the user clicks "Yes"
                 Navigator.of(context).pop(); // Close the dialog
                 _completePurchase(); // Call the function to complete the purchase
               },
@@ -57,7 +69,10 @@ class _CheckOutState extends State<CheckOut> {
   }
 
   void _completePurchase() {
-    // Add your logic to complete the purchase here
+    // clear cart
+    Provider.of<Cart>(context, listen: false).clearCart();
+
+    // Navigate to the success page or perform any other actions
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -88,7 +103,7 @@ class _CheckOutState extends State<CheckOut> {
                   'Checkout',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontSize: 35,
                     color: Color.fromARGB(255, 58, 57, 57),
                   ),
                 ),
@@ -96,12 +111,12 @@ class _CheckOutState extends State<CheckOut> {
                 const Text(
                   '!! Transaksi Dilakukan Di Tempat !!',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     color: Color.fromARGB(255, 199, 3, 3),
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
 
                 // name
                 const Padding(
@@ -111,7 +126,7 @@ class _CheckOutState extends State<CheckOut> {
                       Text(
                         'Name : ',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 107, 106, 106),
                         ),
@@ -143,7 +158,65 @@ class _CheckOutState extends State<CheckOut> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
+
+                // Hari
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Hari Pengambilan Barang.. : ',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 107, 106, 106),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 5),
+
+                // List Hari
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade400),
+                      ),
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                    ),
+                    value: dropdownHari,
+                    onChanged: (String? value) {
+                      setState(() {
+                        dropdownHari = value!;
+                      });
+                    },
+                    items:
+                        listHari.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+                const SizedBox(height: 15),
 
                 // lokasi
                 const Padding(
@@ -153,7 +226,7 @@ class _CheckOutState extends State<CheckOut> {
                       Text(
                         'Lokasi Pengambilan Barang.. : ',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 107, 106, 106),
                         ),
@@ -185,10 +258,10 @@ class _CheckOutState extends State<CheckOut> {
                         horizontal: 16,
                       ),
                     ),
-                    value: dropdownValue,
+                    value: dropdownLokasi,
                     onChanged: (String? value) {
                       setState(() {
-                        dropdownValue = value!;
+                        dropdownLokasi = value!;
                       });
                     },
                     items: listLokasi
@@ -201,17 +274,17 @@ class _CheckOutState extends State<CheckOut> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
-                // Number
+                // Information
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     children: [
                       Text(
-                        'Number Phone : ',
+                        'Information : ',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 107, 106, 106),
                         ),
@@ -235,7 +308,7 @@ class _CheckOutState extends State<CheckOut> {
                       ),
                       fillColor: Colors.grey.shade200,
                       filled: true,
-                      hintText: 'Number',
+                      hintText: 'Number or Instagram',
                       hintStyle: TextStyle(
                         color: Colors.grey[500],
                       ),
@@ -243,7 +316,7 @@ class _CheckOutState extends State<CheckOut> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
                 // note
                 const Padding(
@@ -253,7 +326,7 @@ class _CheckOutState extends State<CheckOut> {
                       Text(
                         'Note : ',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 107, 106, 106),
                         ),
