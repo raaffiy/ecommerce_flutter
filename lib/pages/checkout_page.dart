@@ -82,8 +82,36 @@ class _CheckOutState extends State<CheckOut> {
   }
 
   void _onTap() {
-    _showConfirmationDialog();
+    // Check if the name and note fields are empty
+    if (_nameController.text.isEmpty || _noteController.text.isEmpty) {
+      _showDataNotEnteredDialog();
+    } else {
+      _showConfirmationDialog();
+    }
   }
+
+  Future<void> _showDataNotEnteredDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Incomplete Data'),
+          content: const Text('Some data has not been entered.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +169,7 @@ class _CheckOutState extends State<CheckOut> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _nameController,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -299,6 +328,7 @@ class _CheckOutState extends State<CheckOut> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _noteController,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),

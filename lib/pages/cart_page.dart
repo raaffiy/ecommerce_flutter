@@ -69,12 +69,33 @@ class CartPage extends StatelessWidget {
 
             // button Checkout
             GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CheckOut(),
-                ),
-              ),
+              onTap: () {
+                if (value.getUserCart().isEmpty) {
+                  // Show dialog if the cart is empty
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Cart is Empty'),
+                      content: const Text(
+                          'Add products to the cart before checking out.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  // Proceed to checkout
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CheckOut(),
+                    ),
+                  );
+                }
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 104, 143, 106),
