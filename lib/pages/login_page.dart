@@ -53,12 +53,12 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
+        return const AlertDialog(
           backgroundColor: Colors.white,
           title: Center(
             child: Text(
-              message,
-              style: const TextStyle(color: Colors.red),
+              "Enter your email and password correctly",
+              style: TextStyle(color: Colors.red, fontSize: 15),
             ),
           ),
         );

@@ -42,11 +42,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               backgroundColor: Colors.white,
               content: Text(
-                e.message.toString(),
-                style: const TextStyle(color: Colors.red),
+                "Enter Email Correctly",
+                style: TextStyle(color: Colors.red),
               ),
             );
           },
