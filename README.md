@@ -1,4 +1,8 @@
+# ===================================
+
 ## Page Folders in Login Page & Register Page & Forgot Password Page
+
+# ===================================
 
 <h3>Page Intro</h3>
 
@@ -31,7 +35,11 @@
 5. square_tile.dart = Desain Button register with google
 6. auth_service.dart = Login / Registrasi melalui button google
 
+# ===================================
+
 ## Page Folders in Home Page & Cart Page & Transaksi Page
+
+# ===================================
 
 <h3>Page Home</h3>
 
@@ -47,15 +55,38 @@
 1. shop_page.dart (Page Utama)
 2. shoe_tile.dart = Membuat desain tampilan pada shop page lalu di hubungkan dengan shop page
 3. shoe.dart = membuat tipe data category berdasarkan product
+4. all_product_page.dart = Menghubungkan ke menu all products page
+
+<h3>All Product (shop page)</h3>
+
+1. all_product_page.dart (Page Utama)
+2. all_product_tile.dart = ui card product yang akan di hubungkan ke all_product_page.dart
+
+# ===================================
 
 <h3>Page Cart</h3>
 
 1. cart_page.dart (Page Utama)
 2. cart_item.dart = Membuat desain tampilan pada cart page lalu di hubungkan dengan cart page
 3. cart.dart = Database yang dihubungkan dengan shoe.dart yang berdasarkan category
+4. checkout_page.dart = Button untuk menampilkan page checkout
+
+<h3>Checkout (cart page)</h3>
+
+1. checkout_page.dart (Page Utama)
+2. success_buy.dart = Button untuk menampilkan page success buy
+
+<h3>Success Buy (cart page)</h3>
+
+1. success_buy.dart (Page Utama)
+2. home_page.dart = Button untuk menampilkan page home
+
+# ===================================
+
+<h3>Page Transaction</h3>
+
+1. transaksi_page.dart (Page Utama)
 
 ## Maintance Update
 
-1. checkout_page.dart = fix ui
-2. transaksi_page.dart = fix ui
-3. fix to system = add to cart, checkout, all
+1. fix to system = add to cart, checkout, all
