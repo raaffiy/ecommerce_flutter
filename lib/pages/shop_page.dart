@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({Key? key});
+  const ShopPage({super.key});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
