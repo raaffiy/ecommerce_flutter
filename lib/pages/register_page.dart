@@ -151,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ForgotPasswordPage();
+                                return const ForgotPasswordPage();
                               },
                             ),
                           );
