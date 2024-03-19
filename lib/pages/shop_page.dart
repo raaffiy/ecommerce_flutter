@@ -28,8 +28,8 @@ class _ShopPageState extends State<ShopPage> {
     setState(() {
       filteredShoes =
           Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
-        return shoe.name.toLowerCase().contains(query.toLowerCase()) ||
-            shoe.username.toLowerCase().contains(query.toLowerCase());
+        return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
+            shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();
     });
   }

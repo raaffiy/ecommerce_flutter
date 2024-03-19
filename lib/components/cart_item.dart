@@ -68,18 +68,18 @@ class _CartItemState extends State<CartItem> {
       ),
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: Image.asset(widget.shoe.imagePath, width: 50),
+        leading: Image.asset(widget.shoe.image, width: 50),
 
         // product name
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Text(widget.shoe.name),
+          child: Text(widget.shoe.nameProduct),
         ),
 
         // harga product
         subtitle: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Text('Rp ' + widget.shoe.price),
+          child: Text('Rp ' + widget.shoe.priceProduct),
         ),
 
         trailing: Row(

@@ -34,7 +34,7 @@ class ShoeTile extends StatelessWidget {
                   children: [
                     // Shoe Name
                     Text(
-                      shoe.username,
+                      shoe.nameUser,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 20,
@@ -88,14 +88,14 @@ class ShoeTile extends StatelessWidget {
           // Shoe Picture
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(shoe.imagePath, height: 220),
+            child: Image.asset(shoe.image, height: 220),
           ),
 
           // description
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
-              shoe.description,
+              shoe.descriptionProduct,
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -112,7 +112,7 @@ class ShoeTile extends StatelessWidget {
                   children: [
                     // Shoe Name
                     Text(
-                      shoe.name,
+                      shoe.nameProduct,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -122,7 +122,7 @@ class ShoeTile extends StatelessWidget {
                     const SizedBox(height: 5),
 
                     Text(
-                      'Rp ' + shoe.price,
+                      'Rp ' + shoe.priceProduct,
                       style: const TextStyle(
                         color: Colors.grey,
                       ),
