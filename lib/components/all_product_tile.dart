@@ -102,6 +102,8 @@ class AllTile extends StatelessWidget {
               ),
             ),
 
+            const SizedBox(height: 10),
+
             // price + details
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
