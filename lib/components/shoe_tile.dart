@@ -48,7 +48,7 @@ class ShoeTile extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            shoe.kelas,
+                            shoe.kelasUser,
                             style: const TextStyle(
                               color: Colors.grey,
                             ),
@@ -60,7 +60,7 @@ class ShoeTile extends StatelessWidget {
                           ),
                           const SizedBox(width: 3),
                           Text(
-                            shoe.jurusan,
+                            shoe.jurusanUser,
                             style: const TextStyle(
                               color: Colors.grey,
                             ),
@@ -88,7 +88,10 @@ class ShoeTile extends StatelessWidget {
           // Shoe Picture
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(shoe.image, height: 220),
+            child: Image.network(
+              shoe.image, // Menggunakan Image.network untuk URL gambar eksternal
+              height: 220,
+            ),
           ),
 
           // description

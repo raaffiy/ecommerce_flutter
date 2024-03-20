@@ -68,7 +68,7 @@ class _CartItemState extends State<CartItem> {
       ),
       margin: const EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: Image.asset(widget.shoe.image, width: 50),
+        leading: Image.network(widget.shoe.image, width: 50),
 
         // product name
         title: SingleChildScrollView(

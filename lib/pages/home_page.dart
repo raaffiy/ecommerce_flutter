@@ -1,4 +1,5 @@
 import 'package:ecommerce/components/bottom_nav_bar.dart';
+import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/pages/cart_page.dart';
 import 'package:ecommerce/pages/intro_page.dart';
 import 'package:ecommerce/pages/shop_page.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final DatabaseService _databaseService = DatabaseService();
   late User? user;
 
   @override

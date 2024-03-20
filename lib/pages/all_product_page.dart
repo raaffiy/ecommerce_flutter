@@ -25,18 +25,26 @@ class _AllProductsState extends State<AllProducts> {
     super.initState();
     dropdownKelas = filterKelas.first;
     dropdownJurusan = filterJurusan.first;
-    filteredShoes = Provider.of<Cart>(context, listen: false).getShoeList();
+    loadShoeList();
     updateFilteredShoes();
+  }
+
+  void loadShoeList() async {
+    // Mendapatkan daftar sepatu dari Cart
+    List<Shoe> shoeList =
+        await Provider.of<Cart>(context, listen: false).getShoeList();
+    setState(() {
+      filteredShoes = shoeList;
+    });
   }
 
   void updateFilteredShoes() {
     setState(() {
-      filteredShoes =
-          Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
+      filteredShoes = filteredShoes.where((shoe) {
         bool isKelasMatch =
-            dropdownKelas.isEmpty || shoe.kelas == dropdownKelas;
+            dropdownKelas.isEmpty || shoe.kelasUser == dropdownKelas;
         bool isJurusanMatch =
-            dropdownJurusan.isEmpty || shoe.jurusan == dropdownJurusan;
+            dropdownJurusan.isEmpty || shoe.jurusanUser == dropdownJurusan;
 
         return isKelasMatch && isJurusanMatch;
       }).toList();
@@ -83,8 +91,7 @@ class _AllProductsState extends State<AllProducts> {
   // Search function
   void searchShoes(String query) {
     setState(() {
-      filteredShoes =
-          Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
+      filteredShoes = filteredShoes.where((shoe) {
         return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
             shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();

@@ -20,14 +20,22 @@ class _ShopPageState extends State<ShopPage> {
   @override
   void initState() {
     super.initState();
-    filteredShoes = Provider.of<Cart>(context, listen: false).getShoeList();
+    loadShoeList();
+  }
+
+  void loadShoeList() async {
+    // Mendapatkan daftar sepatu dari Cart
+    List<Shoe> shoeList =
+        await Provider.of<Cart>(context, listen: false).getShoeList();
+    setState(() {
+      filteredShoes = shoeList;
+    });
   }
 
   // Search function
   void searchShoes(String query) {
     setState(() {
-      filteredShoes =
-          Provider.of<Cart>(context, listen: false).getShoeList().where((shoe) {
+      filteredShoes = filteredShoes.where((shoe) {
         return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
             shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();
