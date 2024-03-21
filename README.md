@@ -4,14 +4,14 @@
 
 # ===================================
 
-<h3>Page Intro</h3>
+<h3>Page Intro ( FIX )</h3>
 
 1. intro_page.dart (Page Utama)
 2. login_or_register_page.dart => Melihat database (firebase) bahwa akun sudah terdaftar atau belum
 3. auth_page.dart => Jika sudah memiliki account maka menampilkan page Home,
    Jika belum memiliki account maka menampilkan page login
 
-<h3>Page Login</h3>
+<h3>Page Login ( FIX )</h3>
 
 1. login_page.dart (Page Utama)
 2. my_button.dart = Desain button login
@@ -20,13 +20,13 @@
 5. square_tile.dart = Desain Button Login with google
 6. auth_service.dart = Login / Registrasi melalui button google
 
-<h3>Page Forgot Password</h3>
+<h3>Page Forgot Password ( FIX )</h3>
 
 1. forgot_pw_page.dart (Page Utama)
 2. my_button.dart = Desain button login
 3. my_textfield_email.dart = Desain input data login (email)
 
-<h3>Page Register</h3>
+<h3>Page Register ( FIX )</h3>
 
 1. register_page.dart (Page Utama)
 2. my_button.dart = Desain button register
@@ -41,7 +41,7 @@
 
 # ===================================
 
-<h3>Page Home</h3>
+<h3>Page Home ( FIX )</h3>
 
 1. home_page.dart (Page Utama)
 2. bottom_nav_bar.dart = Membuat desain navbar yang berada di bawah
@@ -49,8 +49,9 @@
 4. cart_page.dart = Untuk menghubungkan home page dengan cart page (button)
 5. shop_page.dart = Untuk menghubungkan home page dengan Shop page (button)
 6. drawer_list = Desain Drawer yang akan dihubungkan ke home page dan about page
+7. product.dart = Structure pengambilan data product dari firebase (firestore)
 
-<h3>Page Shop</h3>
+<h3>Page Shop ( FIX )</h3>
 
 1. shop_page.dart (Page Utama)
 2. shoe_tile.dart = Membuat desain tampilan pada shop page lalu di hubungkan dengan shop page
@@ -64,7 +65,7 @@
 
 # ===================================
 
-<h3>Page Cart</h3>
+<h3>Page Cart ( MAINTANCE )</h3>
 
 1. cart_page.dart (Page Utama)
 2. cart_item.dart = Membuat desain tampilan pada cart page lalu di hubungkan dengan cart page
@@ -83,10 +84,6 @@
 
 # ===================================
 
-<h3>Page Transaction</h3>
+<h3>Page Transaction ( MAINTANCE )</h3>
 
 1. transaksi_page.dart (Page Utama)
-
-## Maintance Update
-
-1. fix to system = add to cart, checkout, all
