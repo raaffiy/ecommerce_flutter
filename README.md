@@ -58,7 +58,7 @@
 3. shoe.dart = membuat tipe data category berdasarkan product
 4. all_product_page.dart = Menghubungkan ke menu all products page
 
-<h3>All Product (shop page)</h3>
+<h3>All Product ( FIX )</h3>
 
 1. all_product_page.dart (Page Utama)
 2. all_product_tile.dart = ui card product yang akan di hubungkan ke all_product_page.dart
