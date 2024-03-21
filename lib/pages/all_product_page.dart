@@ -12,14 +12,6 @@ class AllProducts extends StatefulWidget {
 }
 
 class _AllProductsState extends State<AllProducts> {
-  // list kelas
-  List<String> filterKelas = <String>['X', 'XI', 'XII'];
-  String dropdownKelas = '';
-
-  // list jurusan
-  List<String> filterJurusan = <String>['TKJ', 'TEI', 'RPL', 'TET', 'AK', 'TO'];
-  String dropdownJurusan = '';
-
   @override
   void initState() {
     super.initState();
@@ -29,8 +21,16 @@ class _AllProductsState extends State<AllProducts> {
     updateFilteredShoes();
   }
 
+  // list kelas
+  List<String> filterKelas = <String>['X', 'XI', 'XII'];
+  String dropdownKelas = '';
+
+  // list jurusan
+  List<String> filterJurusan = <String>['TKJ', 'TEI', 'RPL', 'TET', 'AK', 'TO'];
+  String dropdownJurusan = '';
+
+  // Mendapatkan daftar sepatu dari Cart
   void loadShoeList() async {
-    // Mendapatkan daftar sepatu dari Cart
     List<Shoe> shoeList =
         await Provider.of<Cart>(context, listen: false).getShoeList();
     setState(() {
@@ -38,9 +38,14 @@ class _AllProductsState extends State<AllProducts> {
     });
   }
 
-  void updateFilteredShoes() {
+  // Filter dropdownKelas & dropdownJurusan
+  void updateFilteredShoes() async {
+    // Load the full shoe list
+    List<Shoe> shoeList =
+        await Provider.of<Cart>(context, listen: false).getShoeList();
+
     setState(() {
-      filteredShoes = filteredShoes.where((shoe) {
+      filteredShoes = shoeList.where((shoe) {
         bool isKelasMatch =
             dropdownKelas.isEmpty || shoe.kelasUser == dropdownKelas;
         bool isJurusanMatch =
@@ -89,9 +94,14 @@ class _AllProductsState extends State<AllProducts> {
   late List<Shoe> filteredShoes = [];
 
   // Search function
-  void searchShoes(String query) {
+  void searchShoes(String query) async {
+    // Load the full shoe list
+    List<Shoe> shoeList =
+        await Provider.of<Cart>(context, listen: false).getShoeList();
+
+    // Apply the search query to the full shoe list
     setState(() {
-      filteredShoes = filteredShoes.where((shoe) {
+      filteredShoes = shoeList.where((shoe) {
         return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
             shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();

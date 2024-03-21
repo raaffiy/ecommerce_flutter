@@ -33,9 +33,14 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   // Search function
-  void searchShoes(String query) {
+  void searchShoes(String query) async {
+    // Load the full shoe list
+    List<Shoe> shoeList =
+        await Provider.of<Cart>(context, listen: false).getShoeList();
+
+    // Apply the search query to the full shoe list
     setState(() {
-      filteredShoes = filteredShoes.where((shoe) {
+      filteredShoes = shoeList.where((shoe) {
         return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
             shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();
