@@ -30,7 +30,8 @@ class _AllProductsState extends State<AllProducts> {
   String dropdownJurusan = '';
 
   // Mendapatkan daftar sepatu dari Cart
-  void loadShoeList() async {
+  Future<void> loadShoeList() async {
+    // Mendapatkan daftar sepatu dari Cart
     List<Shoe> shoeList =
         await Provider.of<Cart>(context, listen: false).getShoeList();
     setState(() {
@@ -94,7 +95,7 @@ class _AllProductsState extends State<AllProducts> {
   late List<Shoe> filteredShoes = [];
 
   // Search function
-  void searchShoes(String query) async {
+  Future<void> searchShoes(String query) async {
     // Load the full shoe list
     List<Shoe> shoeList =
         await Provider.of<Cart>(context, listen: false).getShoeList();
@@ -105,6 +106,15 @@ class _AllProductsState extends State<AllProducts> {
         return shoe.nameProduct.toLowerCase().contains(query.toLowerCase()) ||
             shoe.nameUser.toLowerCase().contains(query.toLowerCase());
       }).toList();
+    });
+  }
+
+  Future<void> _refresh() async {
+    // Refresh shoe list
+    await loadShoeList();
+    setState(() {
+      // Update filtered shoes after refreshing
+      updateFilteredShoes();
     });
   }
 
@@ -131,153 +141,158 @@ class _AllProductsState extends State<AllProducts> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
+            child: RefreshIndicator(
+              onRefresh: _refresh,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(), // Add this line
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
 
-                  // Search Bar
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            onChanged: searchShoes,
-                            decoration: const InputDecoration(
-                              hintText: 'Search',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        // Dropdown kelas
-                        Expanded(
-                          // Menambahkan Expanded untuk mendukung CrossAxisAlignment.start
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade400),
-                              ),
-                              fillColor: Colors.grey.shade200,
-                              filled: true,
-                              hintStyle: TextStyle(
-                                color: Colors.grey[500],
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                                horizontal: 16,
+                    // Search Bar
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.symmetric(horizontal: 25),
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              onChanged: searchShoes,
+                              decoration: const InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: InputBorder.none,
                               ),
                             ),
-                            value: dropdownKelas,
-                            onChanged: (String? value) {
-                              setState(() {
-                                dropdownKelas = value!;
-                                updateFilteredShoes();
-                              });
-                            },
-                            items: filterKelas
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
                           ),
-                        ),
+                          const Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                    ),
 
-                        const SizedBox(width: 15),
+                    const SizedBox(height: 15),
 
-                        // Dropdown jurusan
-                        Expanded(
-                          // Menambahkan Expanded untuk mendukung CrossAxisAlignment.start
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          // Dropdown kelas
+                          Expanded(
+                            // Menambahkan Expanded untuk mendukung CrossAxisAlignment.start
+                            child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade400),
-                              ),
-                              fillColor: Colors.grey.shade200,
-                              filled: true,
-                              hintStyle: TextStyle(
-                                color: Colors.grey[500],
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 12,
-                                horizontal: 16,
-                              ),
+                              value: dropdownKelas,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  dropdownKelas = value!;
+                                  updateFilteredShoes();
+                                });
+                              },
+                              items: filterKelas.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
                             ),
-                            value: dropdownJurusan,
-                            onChanged: (String? value) {
-                              setState(() {
-                                dropdownJurusan = value!;
-                                updateFilteredShoes();
-                              });
-                            },
-                            items: filterJurusan
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
                           ),
-                        ),
-                      ],
+
+                          const SizedBox(width: 15),
+
+                          // Dropdown jurusan
+                          Expanded(
+                            // Menambahkan Expanded untuk mendukung CrossAxisAlignment.start
+                            child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade400),
+                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                              ),
+                              value: dropdownJurusan,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  dropdownJurusan = value!;
+                                  updateFilteredShoes();
+                                });
+                              },
+                              items: filterJurusan
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
-                  // List of shoe for sale
-                  SizedBox(
-                    height: 550, // Set a fixed height for the container
-                    child: ListView.builder(
-                      itemCount: filteredShoes.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        // get a shoe from shop list
-                        Shoe shoe = filteredShoes[index];
+                    // List of shoe for sale
+                    SizedBox(
+                      height: 550, // Set a fixed height for the container
+                      child: ListView.builder(
+                        itemCount: filteredShoes.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          // get a shoe from shop list
+                          Shoe shoe = filteredShoes[index];
 
-                        // Return The Shoe
-                        return AllTile(
-                          shoe: shoe,
-                          onTap: () => addShoeToCart(shoe),
-                        );
-                      },
+                          // Return The Shoe
+                          return AllTile(
+                            shoe: shoe,
+                            onTap: () => addShoeToCart(shoe),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

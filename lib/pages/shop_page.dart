@@ -23,7 +23,7 @@ class _ShopPageState extends State<ShopPage> {
     loadShoeList();
   }
 
-  void loadShoeList() async {
+  Future<void> loadShoeList() async {
     // Mendapatkan daftar sepatu dari Cart
     List<Shoe> shoeList =
         await Provider.of<Cart>(context, listen: false).getShoeList();
@@ -33,7 +33,7 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   // Search function
-  void searchShoes(String query) async {
+  Future<void> searchShoes(String query) async {
     // Load the full shoe list
     List<Shoe> shoeList =
         await Provider.of<Cart>(context, listen: false).getShoeList();
@@ -82,118 +82,126 @@ class _ShopPageState extends State<ShopPage> {
     }
   }
 
+  Future<void> _refresh() async {
+    // Refresh shoe list
+    await loadShoeList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(
-      builder: (context, value, child) => SingleChildScrollView(
-        child: Column(
-          children: [
-            // Search Bar
-            Container(
-              padding: const EdgeInsets.all(12),
-              margin: const EdgeInsets.symmetric(horizontal: 25),
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      onChanged: searchShoes,
-                      decoration: const InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
+      builder: (context, value, child) => RefreshIndicator(
+        onRefresh: _refresh,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Search Bar
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.symmetric(horizontal: 25),
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        onChanged: searchShoes,
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
-                  ),
-                  const Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-            ),
-
-            // Message
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 25.0),
-              child: Text(
-                'Welcome ' + user.email!,
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-            ),
-
-            // Hot Picks
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text(
-                    'Hot Picks 🔥',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                    const Icon(
+                      Icons.search,
+                      color: Colors.grey,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AllProducts(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'See All',
+                  ],
+                ),
+              ),
+
+              // Message
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 25.0),
+                child: Text(
+                  'Welcome ' + user.email!,
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+              ),
+
+              // Hot Picks
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'Hot Picks 🔥',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        fontSize: 24,
                       ),
                     ),
-                  ),
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AllProducts(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'See All',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            // List of shoe for sale
-            Container(
-              height: 408, // Adjust the height according to your requirement
-              child: ListView.builder(
-                itemCount: filteredShoes.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  // get a shoe from filtered shoe list
-                  Shoe shoe = filteredShoes[index];
+              // List of shoe for sale
+              Container(
+                height: 408, // Adjust the height according to your requirement
+                child: ListView.builder(
+                  itemCount: filteredShoes.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    // get a shoe from filtered shoe list
+                    Shoe shoe = filteredShoes[index];
 
-                  // Return The Shoe
-                  return ShoeTile(
-                    shoe: shoe,
-                    onTap: () => addShoeToCart(shoe),
-                  );
-                },
+                    // Return The Shoe
+                    return ShoeTile(
+                      shoe: shoe,
+                      onTap: () => addShoeToCart(shoe),
+                    );
+                  },
+                ),
               ),
-            ),
 
-            const Padding(
-              padding: EdgeInsets.only(
-                top: 25.0,
-                left: 50,
-                right: 50,
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 25.0,
+                  left: 50,
+                  right: 50,
+                ),
+                child: Divider(
+                  color: Colors.white,
+                ),
               ),
-              child: Divider(
-                color: Colors.white,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
