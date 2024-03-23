@@ -46,10 +46,11 @@
 1. home_page.dart (Page Utama)
 2. bottom_nav_bar.dart = Membuat desain navbar yang berada di bawah
 3. about_page.dart = Untuk menghubungkan home page dengan About page (button)
-4. cart_page.dart = Untuk menghubungkan home page dengan cart page (button)
+4. cart_page.dart = Untuk menghubungkan home page dengan Cart page (button)
 5. shop_page.dart = Untuk menghubungkan home page dengan Shop page (button)
-6. drawer_list = Desain Drawer yang akan dihubungkan ke home page dan about page
-7. product.dart = Structure pengambilan data product dari firebase (firestore)
+6. transaksi_page.dart = Untuk menghubungkan home page dengan transaksi page (button)
+7. drawer_list = Desain Drawer yang akan dihubungkan ke home page dan about page
+8. product.dart = Structure pengambilan data product dari firebase (firestore)
 
 <h3>Page Shop ( FIX )</h3>
 
