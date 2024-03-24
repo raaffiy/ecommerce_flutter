@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AllProducts extends StatefulWidget {
-  const AllProducts({Key? key});
+  const AllProducts({super.key});
 
   @override
   State<AllProducts> createState() => _AllProductsState();
@@ -61,8 +61,8 @@ class _AllProductsState extends State<AllProducts> {
   void addShoeToCart(Shoe shoe) {
     var cart = Provider.of<Cart>(context, listen: false);
 
-    // Check if the shoe is already in the cart
-    if (cart.isShoeInCart(shoe)) {
+    // Check if the shoe is already in the cart based on ID
+    if (cart.isShoeIdInCart(shoe.id)) {
       // Show dialog if the product is already in the basket
       showDialog(
         context: context,

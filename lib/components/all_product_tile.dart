@@ -43,8 +43,6 @@ class AllTile extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 5),
-
                       Padding(
                         padding: const EdgeInsets.only(right: 25.0),
                         child: Row(
@@ -87,6 +85,8 @@ class AllTile extends StatelessWidget {
               ),
             ),
 
+            const SizedBox(height: 10),
+
             // Shoe Picture
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
@@ -95,6 +95,8 @@ class AllTile extends StatelessWidget {
                 height: 220,
               ),
             ),
+
+            const SizedBox(height: 10),
 
             // description
             Padding(

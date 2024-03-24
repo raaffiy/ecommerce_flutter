@@ -75,12 +75,6 @@ flutter:
     - lib/images/google.png
     - lib/images/add_account.png
     - lib/images/forgot_account.png
-    - lib/images/product.png
-    - lib/images/product2.png
-    - lib/images/product3.png
-    - lib/images/product4.png
-    - lib/images/product5.png
-    - lib/images/product6.png
     - assets/icon.png
     - lib/images/success.png
 

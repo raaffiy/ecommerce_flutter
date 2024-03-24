@@ -14,20 +14,31 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   int quantity = 1; // Tambahkan variabel quantity
 
-  // Mengurangi jumlah item dalam keranjang
   void decreaseQuantity() {
     setState(() {
       if (quantity > 1) {
         quantity--;
       }
     });
+    // Tambahkan kode untuk mengupdate total pembayaran ketika kuantitas berubah
+    updateTotalPayment();
   }
 
-  // Menambah jumlah item dalam keranjang
   void increaseQuantity() {
     setState(() {
       quantity++;
     });
+    // Tambahkan kode untuk mengupdate total pembayaran ketika kuantitas berubah
+    updateTotalPayment();
+  }
+
+  // Metode untuk mengupdate total pembayaran
+  void updateTotalPayment() {
+    // Dapatkan total pembayaran dari Provider<Cart>
+    double totalPayment =
+        Provider.of<Cart>(context, listen: true).calculateTotalPayment();
+    // Refresh tampilan dengan setState
+    setState(() {});
   }
 
   // remove item from cart
@@ -88,7 +99,9 @@ class _CartItemState extends State<CartItem> {
             // Tombol kurangi jumlah
             IconButton(
               icon: const Icon(Icons.remove),
-              onPressed: decreaseQuantity,
+              onPressed: () {
+                decreaseQuantity();
+              },
             ),
             // Text menampilkan jumlah
             Text(
@@ -98,7 +111,9 @@ class _CartItemState extends State<CartItem> {
             // Tombol tambah jumlah
             IconButton(
               icon: const Icon(Icons.add),
-              onPressed: increaseQuantity,
+              onPressed: () {
+                increaseQuantity();
+              },
             ),
             // Tombol hapus item
             IconButton(

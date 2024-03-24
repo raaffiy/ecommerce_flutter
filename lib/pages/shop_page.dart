@@ -51,8 +51,8 @@ class _ShopPageState extends State<ShopPage> {
   void addShoeToCart(Shoe shoe) {
     var cart = Provider.of<Cart>(context, listen: false);
 
-    // Check if the shoe is already in the cart
-    if (cart.isShoeInCart(shoe)) {
+    // Check if the shoe is already in the cart based on ID
+    if (cart.isShoeIdInCart(shoe.id)) {
       // Show dialog if the product is already in the basket
       showDialog(
         context: context,

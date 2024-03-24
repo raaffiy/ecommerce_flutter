@@ -4,37 +4,38 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Cart extends ChangeNotifier {
-  // list of items in user cart
   List<Shoe> userCart = [];
 
   bool isShoeInCart(Shoe shoe) {
     return userCart.contains(shoe);
   }
 
-  // get cart
+  // pengecekan apakah product sudah ada di cart? by id
+  bool isShoeIdInCart(String shoeId) {
+    return userCart.any((shoe) => shoe.id == shoeId);
+  }
+
   List<Shoe> getUserCart() {
     return userCart;
   }
 
-  // add items to cart
   void addItemToCart(Shoe shoe) {
     userCart.add(shoe);
-    notifyListeners();
+    notifyListeners(); // Notify listeners when an item is added to the cart
   }
 
-  // remove items from cart
   void removeItemFromCart(Shoe shoe) {
     userCart.remove(shoe);
-    notifyListeners();
+    notifyListeners(); // Notify listeners when an item is removed from the cart
   }
 
-  // clear product in cart
+  // syntak untuk clear product ketika sudah di checkout
   void clearCart() {
     userCart.clear();
     notifyListeners();
   }
 
-  // Fetch shoe list from Firestore
+  // syntax untuk memanggil product yang ada pada firebase
   static Future<List<Shoe>> fetchShoeList() async {
     List<Shoe> shoes = [];
     try {
@@ -43,7 +44,7 @@ class Cart extends ChangeNotifier {
           await FirebaseFirestore.instance.collection('products').get();
       snapshot.docs.forEach((doc) {
         shoes.add(Shoe(
-          id: doc.id, // Menggunakan id dari dokumen Firestore sebagai id produk
+          id: doc.id,
           image: doc['image'],
           nameProduct: doc['nameProduct'],
           priceProduct: doc['priceProduct'],
@@ -60,8 +61,41 @@ class Cart extends ChangeNotifier {
     return shoes;
   }
 
-  // Method to get shoe list
   Future<List<Shoe>> getShoeList() async {
     return fetchShoeList();
+  }
+
+  int getTotalQuantity() {
+    int totalQuantity = 0;
+    userCart.forEach((shoe) {
+      totalQuantity += getItemQuantity(shoe);
+    });
+    return totalQuantity;
+  }
+
+  int getItemQuantity(Shoe shoe) {
+    int quantity = 0;
+    for (Shoe item in userCart) {
+      if (item.id == shoe.id) {
+        quantity++;
+      }
+    }
+    return quantity;
+  }
+
+  // Metode untuk menghitung total pembayaran
+  double calculateTotalPayment() {
+    double totalPayment = 0;
+
+    // Iterate through each item in the cart
+    for (Shoe shoe in userCart) {
+      // Calculate total price for each item considering its quantity
+      totalPayment += double.parse(shoe.priceProduct) * getItemQuantity(shoe);
+    }
+
+    // Panggil notifyListeners() untuk memberitahu listener bahwa ada perubahan
+    notifyListeners();
+
+    return totalPayment;
   }
 }
