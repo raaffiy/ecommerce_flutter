@@ -88,3 +88,5 @@
 <h3>Page Transaction ( MAINTANCE )</h3>
 
 1. transaksi_page.dart (Page Utama)
+2. checkout_page.dart (menghubungkan data product dengan data transaction)
+3. cart_page.dart (price product)

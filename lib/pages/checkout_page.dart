@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/models/cart.dart';
 import 'package:ecommerce/pages/success_buy.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,9 @@ class CheckOut extends StatefulWidget {
 class _CheckOutState extends State<CheckOut> {
   // list lokasi
   List<String> listLokasi = <String>['TKJ', 'TEI', 'RPL', 'TET', 'AK', 'TO'];
+  String dropdownLokasi = '';
+
+  // list hari
   List<String> listHari = <String>[
     'SENIN',
     'SELASA',
@@ -21,14 +25,30 @@ class _CheckOutState extends State<CheckOut> {
     'JUMAT',
     'SABTU'
   ];
-  String dropdownLokasi = '';
   String dropdownHari = '';
+
+  // list time
+  List<String> listTime = <String>[
+    '09.00 AM',
+    '12.00',
+    '15.00 PM',
+  ];
+  String dropdownTime = '';
+
   @override
   void initState() {
     super.initState();
+    // Inisialisasi firestore
+    firestore = FirebaseFirestore.instance;
+    // Inisialisasi transaction
+    transaction = firestore.collection('transaction');
     dropdownLokasi = listLokasi.first;
     dropdownHari = listHari.first;
+    dropdownTime = listTime.first;
   }
+
+  late FirebaseFirestore firestore; // Ubah menjadi late
+  late CollectionReference transaction; // Ubah menjadi late
 
   void OnTap() {
     Navigator.push(
@@ -39,6 +59,7 @@ class _CheckOutState extends State<CheckOut> {
     );
   }
 
+  // jika semua data sudah di masukkan maka akan menampilkan show dialog di bawah ini
   Future<void> _showConfirmationDialog() async {
     return showDialog<void>(
       context: context,
@@ -57,8 +78,25 @@ class _CheckOutState extends State<CheckOut> {
             TextButton(
               onPressed: () {
                 // Handle the action when the user clicks "Yes"
-                Navigator.of(context).pop(); // Close the dialog
-                _completePurchase(); // Call the function to complete the purchase
+                transaction.add({
+                  'nameUser': _nameController.text,
+                  'hariPengambilan': dropdownHari,
+                  'lokasiPengambilan': dropdownLokasi,
+                  'jamPengambilan': dropdownTime,
+                  'note': _noteController.text,
+                }).then((value) {
+                  // Clear the text fields after successful submission
+                  _nameController.clear();
+                  _noteController.clear();
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                  // Call the function to complete the purchase
+                  _completePurchase();
+                }).catchError((error) {
+                  // Handle error if any
+                  print("Failed to add transaction: $error");
+                  // Optionally, show an error message to the user
+                });
               },
               child: const Text('Yes'),
             ),
@@ -83,7 +121,7 @@ class _CheckOutState extends State<CheckOut> {
 
   void _onTap() {
     // Check if the name and note fields are empty
-    if (_nameController.text.isEmpty || _noteController.text.isEmpty) {
+    if (_nameController.text.isEmpty) {
       _showDataNotEnteredDialog();
     } else {
       _showConfirmationDialog();
@@ -311,7 +349,7 @@ class _CheckOutState extends State<CheckOut> {
                   child: Row(
                     children: [
                       Text(
-                        'Information : ',
+                        'Jam Pengambilan Barang : ',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -324,11 +362,10 @@ class _CheckOutState extends State<CheckOut> {
 
                 const SizedBox(height: 5),
 
-                // Note textfield
+                // List Lokasi
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    controller: _noteController,
+                  child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -338,11 +375,27 @@ class _CheckOutState extends State<CheckOut> {
                       ),
                       fillColor: Colors.grey.shade200,
                       filled: true,
-                      hintText: 'Number or Instagram',
                       hintStyle: TextStyle(
                         color: Colors.grey[500],
                       ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
                     ),
+                    value: dropdownTime,
+                    onChanged: (String? value) {
+                      setState(() {
+                        dropdownTime = value!;
+                      });
+                    },
+                    items:
+                        listTime.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                 ),
 
@@ -371,6 +424,7 @@ class _CheckOutState extends State<CheckOut> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _noteController,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -390,7 +444,6 @@ class _CheckOutState extends State<CheckOut> {
 
                 const SizedBox(height: 12),
 
-                // total
                 // total
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
