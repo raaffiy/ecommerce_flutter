@@ -391,25 +391,31 @@ class _CheckOutState extends State<CheckOut> {
                 const SizedBox(height: 12),
 
                 // total
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                // total
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Total Payment',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
                       ),
-                      Text(
-                        '\$' + '350',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
+                      // Calculate total payment based on all items in the cart
+                      Consumer<Cart>(
+                        builder: (context, cart, child) {
+                          return Text(
+                            'Rp ${cart.calculateTotalPayment().toStringAsFixed(3)}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
