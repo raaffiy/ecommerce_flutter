@@ -85,6 +85,13 @@
 
 # ===================================
 
+<h3>Page Transaction ( MAINTANCE )</h3>
+
+1. transaksi_page.dart (Page Utama)
+2. transaksi_item.dart = UI Product | Transaction Page
+
+# ===================================
+
 <h3>( MAINTANCE )</h3>
 
 1. cart_page.dart = Error Price \* Quantity
