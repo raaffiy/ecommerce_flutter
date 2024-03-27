@@ -1,7 +1,8 @@
+import 'package:ecommerce/pages/transaksi_item.dart';
 import 'package:flutter/material.dart';
 
 class Transaksi extends StatefulWidget {
-  const Transaksi({super.key});
+  const Transaksi({Key? key});
 
   @override
   State<Transaksi> createState() => _TransaksiState();
@@ -12,18 +13,31 @@ class _TransaksiState extends State<Transaksi> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Heading
-          Text(
+          const Text(
             'Transaction',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
 
-          SizedBox(height: 542),
+          const SizedBox(height: 20),
 
-          Padding(
+          // Product
+          Expanded(
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                // Return The TransaksiItem
+                return const TransaksiItem(); // Gunakan TransaksiItem sebagai item dalam list
+              },
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          const Padding(
             padding: EdgeInsets.only(
               top: 25.0,
               left: 25,

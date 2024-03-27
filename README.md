@@ -85,8 +85,8 @@
 
 # ===================================
 
-<h3>Page Transaction ( MAINTANCE )</h3>
+<h3>( MAINTANCE )</h3>
 
-1. transaksi_page.dart (Page Utama)
-2. checkout_page.dart (menghubungkan data product dengan data transaction)
-3. cart_page.dart (price product)
+1. cart_page.dart = Error Price \* Quantity
+2. checkout_page.dart = menghubungkan data product yang di checkout lalu menambahkan ke dalam database transaction
+3. transaksi_page.dart = menghubungkan transaksi page pembeli dengan transaksi page admin
