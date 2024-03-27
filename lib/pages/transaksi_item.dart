@@ -178,11 +178,15 @@ class _VideoDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // Name Product
-          Text(
-            nameProduct,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+          SingleChildScrollView(
+            // Menggunakan SingleChildScrollView untuk membuat teks bisa digulir secara horizontal
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              nameProduct,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
           ),
 
