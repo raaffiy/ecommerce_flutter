@@ -10,6 +10,8 @@ class TransaksiItem extends StatelessWidget {
       image: Image.asset('lib/images/product2.png', height: 68),
       nameProduct: 'Testing Transaction',
       priceProduct: 20,
+      quantityProduct: 2,
+      totalProduct: 40,
     );
   }
 }
@@ -20,12 +22,16 @@ class CustomListItem extends StatelessWidget {
     required this.image,
     required this.nameProduct,
     required this.priceProduct,
+    required this.quantityProduct,
+    required this.totalProduct,
   }) : super(key: key);
 
   // Tipe data
   final Widget image;
   final String nameProduct;
   final double priceProduct;
+  final int quantityProduct;
+  final double totalProduct;
 
   // menampilkan product
   @override
@@ -51,6 +57,8 @@ class CustomListItem extends StatelessWidget {
                 child: _VideoDescription(
                   nameProduct: nameProduct,
                   priceProduct: priceProduct,
+                  quantityProduct: quantityProduct,
+                  totalProduct: totalProduct,
                 ),
               ),
               // Icon dan teks "Waiting"
@@ -164,16 +172,20 @@ class _VideoDescription extends StatelessWidget {
   const _VideoDescription({
     required this.nameProduct,
     required this.priceProduct,
+    required this.quantityProduct,
+    required this.totalProduct,
   });
 
   // Tipe data
   final String nameProduct;
   final double priceProduct;
+  final int quantityProduct;
+  final double totalProduct;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(2.0, 20.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(2.0, 10.0, 0.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -194,9 +206,20 @@ class _VideoDescription extends StatelessWidget {
 
           // Price Product
           Text(
-            'Rp ${priceProduct.toStringAsFixed(3)}',
+            'Rp ${priceProduct.toStringAsFixed(3)}' +
+                '  ×  ' +
+                quantityProduct.toString(),
             style: const TextStyle(fontSize: 11),
           ),
+
+          const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
+
+          Text(
+            'Total: Rp ${totalProduct.toStringAsFixed(3)}',
+            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+          ),
+
+          const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),
         ],
       ),
     );
