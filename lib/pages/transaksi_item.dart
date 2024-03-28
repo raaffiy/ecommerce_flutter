@@ -41,6 +41,7 @@ class CustomListItem extends StatelessWidget {
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(8),
       ),
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

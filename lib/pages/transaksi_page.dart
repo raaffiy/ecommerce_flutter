@@ -27,7 +27,7 @@ class _TransaksiState extends State<Transaksi> {
           // Product
           Expanded(
             child: ListView.builder(
-              itemCount: 1,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 // Return The TransaksiItem
                 return const TransaksiItem(); // Gunakan TransaksiItem sebagai item dalam list
